@@ -1,23 +1,31 @@
 const question_1 = {
-  question: '',
-  answer: '',
-  currectAnswer: ''
+  question: 'Кто создал автомобиль TESLA?',
+  answer: 'Никола',
+  currectAnswer: 'Илон Маск'
 }
 
 const question_2 = {
-  question: '',
+  question: 'Дата основания YouTube?',
   answer: '',
-  currectAnswer: ''
+  currectAnswer: '14 февраля 2005 г.'
 }
 
 const question_3 = {
-  question: '',
-  answer: '',
-  currectAnswer: ''
+  question: 'Кто является создателем ROBLOX?',
+  answer: 'Дэвид Басзуки',
+  currectAnswer: 'Дэвид Басзуки'
 }
 
 const question_4 = {
-  question: '',
-  answer: '',
-  currectAnswer: ''
+  question: 'Кем был создан Интернет?',
+  answer: 'Мной)',
+  currectAnswer: 'Тим Бернерс-Ли'
 }
+
+const data = [question_1, question_2, question_3, question_4]
+
+data.forEach(item => {
+  if (item.answer === item.currectAnswer){
+    console.log(item.currectAnswer)
+  }
+})
