@@ -22,10 +22,13 @@ const question_4 = {
   currectAnswer: 'Тим Бернерс-Ли'
 }
 
+// Функция сравнения ответов
+const trueAnswer = (aswer, currectAnswer) => { 
+  aswer === currectAnswer ? 'Правильный ответ' : 'Ответ неверный'
+}
+
 const data = [question_1, question_2, question_3, question_4]
 
 data.forEach(item => {
-  if (item.answer === item.currectAnswer){
-    console.log(item.currectAnswer)
-  }
+  console.log(trueAnswer(item.answer, item.currectAnswer))
 })
