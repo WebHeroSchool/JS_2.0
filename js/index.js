@@ -1,31 +1,47 @@
 const question_1 = {
   question: 'Кто создал автомобиль TESLA?',
-  answer: 'Никола',
-  currectAnswer: 'Илон Маск'
+  answer: {
+    a: 'Стив Джобс',
+    b: 'Никола Тесла',
+    c: 'Илон Маск'  
+  },
+  currectAnswer: 'c'
 }
 
 const question_2 = {
   question: 'Дата основания YouTube?',
-  answer: '',
-  currectAnswer: '14 февраля 2005 г.'
+  answer: {
+    a: '14.02.2005',
+    b: '19.07.2004',
+    c: '01.01.2006'  
+  },
+  currectAnswer: 'a'
 }
 
 const question_3 = {
   question: 'Кто является создателем ROBLOX?',
-  answer: 'Дэвид Басзуки',
-  currectAnswer: 'Дэвид Басзуки'
+  answer: {
+    a: 'Стив Возняк',
+    b: 'Дэвид Басзуки',
+    c: 'Илон Маск'  
+  },
+  currectAnswer: 'b'
 }
 
 const question_4 = {
-  question: 'Кем был создан Интернет?',
-  answer: 'Мной)',
-  currectAnswer: 'Тим Бернерс-Ли'
+  question: 'Какой фреймворк не относится к JavaScript?',
+  answer: {
+    a: 'React',
+    b: 'Polymer',
+    c: 'Flack'  
+  },
+  currectAnswer: 'c'
 }
 
 const data = [question_1, question_2, question_3, question_4]
 
 data.forEach(item => {
-  if (item.answer === item.currectAnswer){
-    console.log(item.currectAnswer)
+  if (item.currectAnswer === 'c'){
+    console.log(item.answer.c)
   }
 })
