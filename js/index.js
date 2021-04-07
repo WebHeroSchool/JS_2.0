@@ -1,16 +1,16 @@
 const question_1 = {
   question: 'Кто создал автомобиль TESLA?',
-  answer: {
+  answers: {
     a: 'Стив Джобс',
-    b: 'Никола Тесла',
-    c: 'Илон Маск'  
+    b: 'Илон Маск',
+    c: 'Никола Тесла'  
   },
-  currectAnswer: 'c'
+  currectAnswer: 'b'
 }
 
 const question_2 = {
   question: 'Дата основания YouTube?',
-  answer: {
+  answers: {
     a: '14.02.2005',
     b: '19.07.2004',
     c: '01.01.2006'  
@@ -20,7 +20,7 @@ const question_2 = {
 
 const question_3 = {
   question: 'Кто является создателем ROBLOX?',
-  answer: {
+  answers: {
     a: 'Стив Возняк',
     b: 'Дэвид Басзуки',
     c: 'Илон Маск'  
@@ -30,7 +30,7 @@ const question_3 = {
 
 const question_4 = {
   question: 'Какой фреймворк не относится к JavaScript?',
-  answer: {
+  answers: {
     a: 'React',
     b: 'Polymer',
     c: 'Flack'  
@@ -38,14 +38,18 @@ const question_4 = {
   currectAnswer: 'c'
 }
 
+
 // Функция сравнения ответов
-const trueAnswer = question => { 
- return question.currectAnswer === 'c' ? question.answer.c : 'Ответ неверный'
+const trueAnswer = (item) => { 
+ return questions[item].currectAnswer === answers[item] ? 'Ответ верный': 'Ответ неверный'
 }
 
 const questions = [question_1, question_2, question_3, question_4]
 
-questions.forEach(item => {
-  console.log(trueAnswer(item)) 
-})
+const answers = ['a', 'c', 'b', 'a']
+
+for (let i = 0; i < questions.length; i++) {
+  console.log(trueAnswer(i))
+}
+
 
