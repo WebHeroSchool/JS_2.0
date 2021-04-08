@@ -38,18 +38,29 @@ const question_4 = {
   currectAnswer: 'c'
 }
 
-
-// Функция сравнения ответов
-const trueAnswer = (item) => { 
- return questions[item].currectAnswer === answers[item] ? 'Ответ верный': 'Ответ неверный'
-}
-
+// Массив с вопросами и массив с ответами
 const questions = [question_1, question_2, question_3, question_4]
+const answers = ['b', 'a', 'b', 'a']
 
-const answers = ['a', 'c', 'b', 'a']
+// Переменная подсчета правильных ответов
+let countAswer = 0
+
+// Ищем параграф 
+const text = document.querySelector('.question')
+
+// Функция подсчета правильных ответов
+const trueAnswer = (item) => { 
+  if (questions[item].currectAnswer === answers[item]) {
+    countAswer++
+  }
+}
 
 for (let i = 0; i < questions.length; i++) {
-  console.log(trueAnswer(i))
+  trueAnswer(i)
 }
+
+text.innerHTML = `Количество правильных ответов: ${countAswer}`
+
+
 
 
