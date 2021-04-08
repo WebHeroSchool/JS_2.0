@@ -42,24 +42,27 @@ const question_4 = {
 const questions = [question_1, question_2, question_3, question_4]
 const answers = ['b', 'a', 'b', 'a']
 
-// Переменная подсчета правильных ответов
-let countAswer = 0
 
-// Ищем параграф 
-const text = document.querySelector('.question')
+// Функция проверки и вывода количества правильных ответов 
+const BuildQuiz = () => { 
+  
+  // Переменная подсчета правильных ответов
+  let countAswer = 0
+  // Ищем параграф 
+  const text = document.querySelector('.question')
 
-// Функция подсчета правильных ответов
-const trueAnswer = (item) => { 
-  if (questions[item].currectAnswer === answers[item]) {
-    countAswer++
+
+  for (let i = 0; i < questions.length; i++) {
+    if (questions[i].currectAnswer === answers[i]) {
+      countAswer++
+    }
   }
+
+  text.innerHTML = `Количество правильных ответов: ${countAswer}`
+  text.style.color = '#0056EC'
 }
 
-for (let i = 0; i < questions.length; i++) {
-  trueAnswer(i)
-}
-
-text.innerHTML = `Количество правильных ответов: ${countAswer}`
+BuildQuiz()
 
 
 
