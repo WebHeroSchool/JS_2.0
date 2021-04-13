@@ -1,69 +1,117 @@
-const question_1 = {
-  question: 'Кто создал автомобиль TESLA?',
-  answers: {
-    a: 'Стив Джобс',
-    b: 'Илон Маск',
-    c: 'Никола Тесла'  
+const DATA = [
+  {
+    question: 'Кто создал автомобиль TESLA?',
+    answers: [
+      {
+        id: '1',
+        value: 'Стив Джобс',
+        correct: false
+      },
+      {
+        id: '2',
+        value: 'Илон Маск',
+        correct: true
+      },
+      {
+        id: '3',
+        value: 'Никола Тесла',
+        correct: false
+      }
+    ]
   },
-  currectAnswer: 'b'
-}
-
-const question_2 = {
-  question: 'Дата основания YouTube?',
-  answers: {
-    a: '14.02.2005',
-    b: '19.07.2004',
-    c: '01.01.2006'  
+  {
+    question: 'Дата основания YouTube?',
+    answers: [
+      {
+        id: '1',
+        value: '14.02.2005',
+        correct: true
+      },
+      {
+        id: '2',
+        value: '19.07.2004',
+        correct: false
+      },
+      {
+        id: '3',
+        value: '01.01.2006',
+        correct: false
+      }
+    ]
   },
-  currectAnswer: 'a'
-}
-
-const question_3 = {
-  question: 'Кто является создателем ROBLOX?',
-  answers: {
-    a: 'Стив Возняк',
-    b: 'Дэвид Басзуки',
-    c: 'Илон Маск'  
+  {
+    question: 'Кто является создателем ROBLOX?',
+    answers: [
+      {
+        id: '1',
+        value: 'Стив Возняк',
+        correct: false
+      },
+      {
+        id: '2',
+        value: 'Дэвид Басзуки',
+        correct: true
+      },
+      {
+        id: '3',
+        value: 'Илон Маск',
+        correct: false
+      }
+    ]
   },
-  currectAnswer: 'b'
-}
+  {
+    question: 'Какой фреймворк не относится к JavaScript?',
+    answers: [
+      {
+        id: '1',
+        value: 'React',
+        correct: false
+      },
+      {
+        id: '2',
+        value: 'Polymer',
+        correct: false
+      },
+      {
+        id: '3',
+        value: 'Flack',
+        correct: true
+      }
+    ]
+  }
+]
 
-const question_4 = {
-  question: 'Какой фреймворк не относится к JavaScript?',
-  answers: {
-    a: 'React',
-    b: 'Polymer',
-    c: 'Flack'  
-  },
-  currectAnswer: 'c'
-}
+// Переменные
+const quizContainer = document.querySelector('.quiz__container')
+const quizTime = quizContainer.querySelector('.quiz__time')
+const quizItem = quizContainer.querySelector('.quiz__item')
+const quizTitle = quizItem.querySelector('.quiz__title')
+const quizAnswers = quizItem.querySelector('.quiz__answers')
+const btnPrev = quizContainer.querySelector('.btn__previous')
+const btnNext = quizContainer.querySelector('.btn__next')
+const btnShow = quizContainer.querySelector('.btn__showResult')
 
-// Массив с вопросами и массив с ответами
-const questions = [question_1, question_2, question_3, question_4]
-const answers = ['b', 'a', 'b', 'a']
+let countSlide = 1
 
-
-// Функция проверки и вывода количества правильных ответов 
-const BuildQuiz = () => { 
-  
-  // Переменная подсчета правильных ответов
-  let countAswer = 0
-  // Ищем параграф 
-  const text = document.querySelector('.question')
-
-
-  for (let i = 0; i < questions.length; i++) {
-    if (questions[i].currectAnswer === answers[i]) {
-      countAswer++
-    }
+const showSlide = (flag) => {
+  if (flag === 'prev') {
+    return countSlide <= 1 ? countSlide = DATA.length : --countSlide
   }
 
-  text.innerHTML = `Количество правильных ответов: ${countAswer}`
-  text.style.color = '#0056EC'
+  if (flag === 'next') {
+    return countSlide >= DATA.length ? countSlide = 1 : ++countSlide
+  }
 }
 
-BuildQuiz()
+btnPrev.addEventListener('click', () => {
+  const slide = showSlide('prev')
+  quizTitle.innerHTML = `Номер слайда ${slide}`
+  console.log(slide)
+})
 
-
-
+btnNext.addEventListener('click', ()=> {
+  const slide = showSlide('next')
+  quizTitle.innerHTML = `Номер слайда ${slide}`
+  console.log(slide)
+})
 

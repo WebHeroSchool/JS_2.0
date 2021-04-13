@@ -1,14 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Js Game</title>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="style.css">
+	<title>Js Game</title>
 </head>
 <body>
-  <h1 class="question"></h1>
-  <!-- Подключение отдельным файлом -->
-  <script src="js/index.js"></script> 
+	<div class="quiz__container">
+		<div class="quiz__time">00:00</div>
+		<div class="quiz__item">
+			<h1 class="quiz__title">Номер слайда</h1>
+			<ul class="quiz__answers">
+				<li class="quiz__answer-item">Ответ 1</li>
+				<li class="quiz__answer-item">Ответ 2</li>
+				<li class="quiz__answer-item">Ответ 3</li>
+			</ul>
+		</div>
+		<div class="btn__container">
+			<button class="btn btn__previous">Предыдущий вопрос</button>
+			<button class="btn btn__next">Следующий вопрос</button>
+			<button class="btn btn__showResult">Показать результаты</button>
+		</div>
+	</div>
+	<script src="js/index.js"></script>
 </body>
 </html>
