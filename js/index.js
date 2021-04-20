@@ -83,14 +83,20 @@ const DATA = [
 
 // Переменные
 const quizContainer = document.querySelector('.quiz__container')
+const regForm = quizContainer.querySelector('.form__reg')
+const nameInput = regForm.querySelector('.form__reg-name')
+const errorMsg = regForm.querySelector('.form__reg-error')
 const quizTime = quizContainer.querySelector('.quiz__time')
 const quizItem = quizContainer.querySelector('.quiz__item')
-const quizTitle = quizItem.querySelector('.quiz__title')
-const quizAnswers = quizItem.querySelector('.quiz__answers')
+const btnContainer = quizContainer.querySelector('.btn__container')
+const btnSub = quizContainer.querySelector('.btn__submit')
 const btnPrev = quizContainer.querySelector('.btn__previous')
 const btnNext = quizContainer.querySelector('.btn__next')
 const btnShowResult = quizContainer.querySelector('.btn__show-result')
-const showResult = quizContainer.querySelector('.show-result')
+const btnRestart = quizContainer.querySelector('.btn__restart')
+
+const showResult = document.createElement('div')
+showResult.className = 'show-result'
 
 let countSlide = 1
 let countResult = 0
@@ -100,26 +106,29 @@ const showSlide = () => {
   renderQuestion(countSlide - 1)
 
   if (countSlide > 1 && countSlide < DATA.length) {
-    btnNext.classList.remove('btn__disabled')
-    btnPrev.classList.remove('btn__disabled')
-    btnShowResult.classList.add('btn__disabled')
+    btnNext.classList.remove('disabled')
+    btnPrev.classList.remove('disabled')
+    btnShowResult.classList.add('disabled')
     return
   }
 
   if (countSlide == DATA.length) {
-    btnNext.classList.add('btn__disabled')
-    btnShowResult.classList.remove('btn__disabled')
+    btnNext.classList.add('disabled')
+    btnShowResult.classList.remove('disabled')
     return
   }
 
   if (countSlide <= 1) {
-    btnPrev.classList.add('btn__disabled')
+    
+    btnPrev.classList.add('disabled')
     return
   }
 }
 
 // Функция занимается рендером каждого слайда
 const renderQuestion = (index) => {
+  regForm.classList.add('disabled')
+
   // Функция для рендера списка ответов
   const renderAnswers = () => DATA[index].answers
     .map((answer) => `
@@ -143,6 +152,8 @@ const renderQuestion = (index) => {
 // Фиксируем нажатие на ответ и его корректность
 quizContainer.addEventListener('change', (event) => {
   const item = event.target
+
+  // Проверка нажатия на вариант ответа
   if (item.classList.contains('answer__input')){
     if (!result[item.name]) {
       // Добавляем в обьект result номер слайда и ответ который выбрал пользователь и запрещаем выбор другого варианта
@@ -154,6 +165,23 @@ quizContainer.addEventListener('change', (event) => {
   }
   
 })
+
+// Нажатие на кнопку старта игры
+btnSub.addEventListener('click', (event) => {
+  event.preventDefault()
+  const reg = new RegExp('^[А-Я]{1}[а-яё]{1,9}')
+  if (reg.test(nameInput.value)) {
+    renderQuestion(0)
+    quizItem.classList.remove('disabled')
+    btnContainer.classList.remove('disabled')
+    return
+  } 
+  errorMsg.classList.remove('disabled')
+  return 
+})
+
+// Фиксация ввода пользователя
+nameInput.oninput = () => { errorMsg.classList.add('disabled') }
 
 btnPrev.addEventListener('click', () => {
   countSlide--
@@ -177,7 +205,21 @@ const checkResult = (value) => {
 }
 
 btnShowResult.addEventListener('click', () => {
-  showResult.innerHTML = `Правильных ответов ${countResult}/${DATA.length}`
+  btnPrev.classList.add('disabled')
+  btnRestart.classList.remove('disabled')
+  showResult.innerHTML = `${nameInput.value} вы ответили на ${countResult}/${DATA.length}`
+  quizContainer.append(showResult)
 })
 
-renderQuestion(0)
+btnRestart.addEventListener('click', () => {
+  countSlide = 1
+  countResult = 0
+  result = {}
+  showResult.remove()
+  nameInput.value = ''
+  regForm.classList.remove('disabled')
+  quizItem.classList.add('disabled')
+  btnContainer.classList.add('disabled')
+})
+
+
