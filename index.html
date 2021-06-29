@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="style.css">
+	<title>Js Game</title>
+</head>
+<body>
+	<div class="quiz__container">
+		<div class="quiz__time disabled">00:00</div>
+		<form action="post" class="form__reg">
+			<input type="text" class="form__reg-name" name="name" placeholder="Введите ваше имя:">
+			<div class="form__reg-error disabled">Ошибка ввода. Имя должно быть русским и содержать от 2-х до 10-ти символов и начинаться с большой буквы!</div>
+			<button class="btn btn__submit">Начать игру</button>
+		</form>
+		<div class="quiz__item"></div>
+		<div class="btn__container disabled">	
+			<button class="btn btn__previous disabled">Предыдущий вопрос</button>
+			<button class="btn btn__next ">Следующий вопрос</button>
+			<button class="btn btn__show-result disabled">Показать результаты</button>
+			<button class="btn btn__restart disabled">Начать заново ?</button>
+		</div>
+	</div>
+	<script src="js/index.js"></script>
+</body>
+</html>
