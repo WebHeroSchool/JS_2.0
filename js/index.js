@@ -101,6 +101,9 @@ showResult.className = 'show-result'
 let countSlide = 1
 let countResult = 0
 let result = {}
+let time = 10
+
+
 
 const showSlide = () => {
   renderQuestion(countSlide - 1)
@@ -128,6 +131,8 @@ const showSlide = () => {
 // Функция занимается рендером каждого слайда
 const renderQuestion = (index) => {
   regForm.classList.add('disabled')
+  quizTime.classList.remove('disabled')
+  
 
   // Функция для рендера списка ответов
   const renderAnswers = () => DATA[index].answers
@@ -169,11 +174,17 @@ quizContainer.addEventListener('change', (event) => {
 // Нажатие на кнопку старта игры
 btnSub.addEventListener('click', (event) => {
   event.preventDefault()
+  
+  setTime(time)
+  setInterval(decreaseTime, 1000)
+  
   const reg = new RegExp('^[А-Я]{1}[а-яё]{1,9}')
   if (reg.test(nameInput.value)) {
     renderQuestion(0)
+
     quizItem.classList.remove('disabled')
     btnContainer.classList.remove('disabled')
+    btnNext.classList.remove('disabled')
     return
   } 
   errorMsg.classList.remove('disabled')
@@ -185,6 +196,7 @@ nameInput.oninput = () => { errorMsg.classList.add('disabled') }
 
 btnPrev.addEventListener('click', () => {
   countSlide--
+  console.log(DATA[countSlide].time)
   showSlide()
 })
 
@@ -192,6 +204,30 @@ btnNext.addEventListener('click', ()=> {
   countSlide++
   showSlide()
 })
+
+// Функция отсчета времени
+function decreaseTime() {
+  if (time === 0) {
+    blockQuiz()
+  }else {
+    let current = --time
+    if (current < 10) {
+      current = `0${current}`
+    }
+    setTime(current)
+  }
+}
+
+// Функция установки времени
+function setTime(value) {
+  quizTime.innerHTML = `00:${value}`
+}
+
+
+// Функция блокировки квиза
+function blockQuiz() {
+
+}
 
 // Функция проверки результатов принимает id выбранного ответа
 const checkResult = (value) => {
@@ -211,6 +247,7 @@ btnShowResult.addEventListener('click', () => {
   quizContainer.append(showResult)
 })
 
+// Начать игру с начала
 btnRestart.addEventListener('click', () => {
   countSlide = 1
   countResult = 0
@@ -219,7 +256,9 @@ btnRestart.addEventListener('click', () => {
   nameInput.value = ''
   regForm.classList.remove('disabled')
   quizItem.classList.add('disabled')
-  btnContainer.classList.add('disabled')
+  btnShowResult.classList.add('disabled')
+  btnRestart.classList.add('disabled')
+  quizTime.classList.add('disabled')
 })
 
 
